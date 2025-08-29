@@ -169,7 +169,7 @@ export default function HelperToast({ onClose, onExpire, arrowTarget }: HelperTo
                                 Hovering activates the background. Use <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/5 dark:bg-white/6 font-medium"><Eye size={14} /> / <EyeOff size={14} /></span> button to focus on it.
                             </div>
                             <div className="mt-3 flex gap-2">
-                                <button onClick={handleGotItClick} className="px-3 py-1 rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white text-sm font-semibold hover:opacity-90 transition-opacity">Got it</button>
+                                <button onClick={handleGotItClick} className="px-3 py-1 rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer">Got it</button>
                             </div>
 
                         </div>
