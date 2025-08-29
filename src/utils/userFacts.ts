@@ -28,13 +28,13 @@ export const gatherUserFacts = async (): Promise<string[]> => {
     const facts: string[] = [];
 
     try {
-        const response = await fetch('http://ip-api.com/json/?fields=status,countryCode,city');
+        const response = await fetch('https://ipwhois.app/json/');
         const data = await response.json();
-        if (data.status === 'success') {
-            if (data.countryCode && demonyms[data.countryCode]) {
-                facts.push(demonyms[data.countryCode]);
-            } else if (data.countryCode) {
-                const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(data.countryCode);
+        if (data.success) {
+            if (data.country_code && demonyms[data.country_code]) {
+                facts.push(demonyms[data.country_code]);
+            } else if (data.country_code) {
+                const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(data.country_code);
                 if (countryName) facts.push(`from ${countryName}`);
             }
             if (data.city) {
