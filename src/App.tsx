@@ -173,7 +173,7 @@ export default function App() {
               className="relative rounded-[2rem] border border-black/10 dark:border-white/10 overflow-hidden shadow-2xl"
               style={{ aspectRatio: "3 / 2" }}
             >
-              <img src="/desk.png" alt="workspace" className="w-full h-full object-cover" />
+              <img src="/desk.jpg" alt="workspace" className="w-full h-full object-cover" />
             </div>
           </div>
         </section>
