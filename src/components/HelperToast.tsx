@@ -101,9 +101,7 @@ export default function HelperToast({ onClose, onExpire, arrowTarget }: HelperTo
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 w-full h-full z-40 pointer-events-none"
-                        aria-hidden="true"
-                    >
+                        className="fixed inset-0 w-full h-full z-40 pointer-events-none">
                         <defs>
                             <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" stopColor="#6366f1" />

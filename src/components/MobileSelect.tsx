@@ -25,9 +25,7 @@ export default function MobileSelect({
         <div className="relative">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/10 text-sm font-medium"
-                aria-label="Filter category"
-            >
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/10 text-sm font-medium">
                 <span>{selectedOption?.label || "All"}</span>
                 <ChevronDown
                     size={14}

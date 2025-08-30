@@ -35,13 +35,13 @@ export function Lightbox({ open, images, startIndex = 0, onClose }: { open: bool
         <motion.div initial={{ scale: 0.96 }} animate={{ scale: 1 }} exit={{ scale: 0.96 }} className="relative w-full max-w-5xl">
           <div className="relative">
             <img src={images[idx]} alt={`screenshot ${idx + 1}`} className="w-full h-[70vh] object-contain rounded-2xl shadow-2xl" />
-            <button aria-label="Close" onClick={onClose} className="absolute top-3 right-3 p-2 rounded-full bg-white/10 text-white backdrop-blur cursor-pointer">
+            <button onClick={onClose} className="absolute top-3 right-3 p-2 rounded-full bg-white/10 text-white backdrop-blur cursor-pointer">
               <X />
             </button>
-            <button aria-label="Previous" onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white cursor-pointer">
+            <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white cursor-pointer">
               <ChevronLeft />
             </button>
-            <button aria-label="Next" onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white cursor-pointer">
+            <button onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white cursor-pointer">
               <ChevronRight />
             </button>
           </div>

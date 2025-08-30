@@ -149,9 +149,7 @@ export function ProjectCard({
                 <div className="relative">
                     <div
                         ref={containerRef}
-                        className="flex items-center gap-2 flex-nowrap overflow-hidden"
-                        aria-live="polite"
-                    >
+                        className="flex items-center gap-2 flex-nowrap overflow-hidden">
                         {items.slice(0, visibleCount).map((s, i) => (
                             <motion.div
                                 key={s + i}
@@ -205,9 +203,7 @@ export function ProjectCard({
 
                     <div
                         ref={measureRef}
-                        style={{ position: "absolute", left: -9999, top: -9999, pointerEvents: "none" }}
-                        aria-hidden
-                    >
+                        style={{ position: "absolute", left: -9999, top: -9999, pointerEvents: "none" }}>
                         <div className="flex items-center gap-2">
                             {items.map((s, i) => (
                                 <div

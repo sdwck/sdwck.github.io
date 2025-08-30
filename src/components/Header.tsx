@@ -39,9 +39,7 @@ export default function Header({
             <MobileSelect value={filter} onChange={setFilter} />
             <button 
               onClick={toggleContent} 
-              className="p-2 rounded-xl border border-black/10 dark:border-white/10 cursor-pointer" 
-              aria-label="Toggle content visibility"
-            >
+              className="p-2 rounded-xl border border-black/10 dark:border-white/10 cursor-pointer">
               {isContentVisible ? <Eye size={16} /> : <EyeOff size={16} />}
             </button>
           </div>
@@ -80,9 +78,7 @@ export default function Header({
             
             <button 
               onClick={toggleContent} 
-              className="p-2 rounded-xl border border-black/10 dark:border-white/10 cursor-pointer" 
-              aria-label="Toggle content visibility"
-            >
+              className="p-2 rounded-xl border border-black/10 dark:border-white/10 cursor-pointer">
               {isContentVisible ? <Eye size={16} /> : <EyeOff size={16} />}
             </button>
           </div>

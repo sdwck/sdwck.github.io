@@ -19,7 +19,6 @@ export default function FancySelect({
   return (
     <div
       role="tablist"
-      aria-label="Filter projects by category"
       className="relative inline-flex items-center gap-2 p-1 rounded-2xl border border-black/10 dark:border-white/10
                  bg-gradient-to-br from-black/5 to-black/10 dark:from-white/6 dark:to-white/8
                  isolate"
@@ -31,7 +30,6 @@ export default function FancySelect({
             <button
               key={opt.key}
               role="tab"
-              aria-selected={selected}
               onClick={() => onChange(opt.key)}
               className={`relative isolate overflow-hidden px-3 py-1.5 rounded-xl text-sm font-semibold
                           transition-transform duration-150 cursor-pointer
@@ -54,9 +52,7 @@ export default function FancySelect({
                   exit={{ opacity: 0 }}
                   transition={{ type: "spring", stiffness: 420, damping: 32 }}
                   className="pointer-events-none absolute inset-0 -z-10 rounded-xl
-                             bg-gradient-to-r from-indigo-500 to-fuchsia-500/90 shadow-lg"
-                  aria-hidden
-                />
+                             bg-gradient-to-r from-indigo-500 to-fuchsia-500/90 shadow-lg"/>
               )}
             </button>
           );

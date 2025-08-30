@@ -22,21 +22,9 @@ export function Subtitle({
 }: SubtitleProps) {
     const [i, setI] = useState(0);
     const [sub, setSub] = useState(0);
-    const [mode, setMode] = useState<"typing" | "pausing" | "deleting">(
-        "typing"
-    );
-
-    const prefersReducedMotion =
-        typeof window !== "undefined" &&
-        window.matchMedia &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const [mode, setMode] = useState<"typing" | "pausing" | "deleting">("typing");
 
     useEffect(() => {
-        if (prefersReducedMotion) {
-            setSub(phrases[i].length);
-            return;
-        }
-
         let t = 0;
         const current = phrases[i];
 
@@ -58,7 +46,7 @@ export function Subtitle({
         }
 
         return () => clearTimeout(t);
-    }, [sub, mode, i, phrases, prefersReducedMotion, typeMs, deleteMs, pauseMs]);
+    }, [sub, mode, i, phrases, typeMs, deleteMs, pauseMs]);
 
     const reservedHeight = `calc(${reserveLines} * ${lineHeightRem + 0.8}rem)`;
 
@@ -83,8 +71,6 @@ export function Subtitle({
                             className={[
                                 "font-mono text-sm sm:text-base lg:text-xl",
                                 "whitespace-normal break-words overflow-hidden",
-                                "bg-clip-text text-transparent",
-                                "bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-amber-400",
                                 "w-full",
                             ].join(" ")}
                             style={{
@@ -92,15 +78,15 @@ export function Subtitle({
                                 wordBreak: "break-word",
                                 whiteSpace: "pre-wrap",
                                 display: "block",
-                            }}
-                            aria-live="polite"
-                        >
-                            {phrases[i].slice(0, sub)}
+                            }}>
                             <span
-                                className="inline ml-1 font-mono text-sm sm:text-base lg:text-xl select-none opacity-80 animate-pulse"
-                                aria-hidden="true"
-                                style={{ lineHeight: `${lineHeightRem}rem` }}
+                                className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-amber-400"
                             >
+                                {phrases[i].slice(0, sub)}
+                            </span>
+                            <span
+                                className="inline ml-1 font-mono text-sm sm:text-base lg:text-xl select-none opacity-90 animate-pulse text-gray-400"
+                                style={{ lineHeight: `${lineHeightRem}rem` }}>
                                 |
                             </span>
                         </span>

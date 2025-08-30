@@ -114,7 +114,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-white to-gray-100 dark:from-[#070710] dark:to-[#0b0b12] text-gray-900 dark:text-gray-100">
-      <ThreeBackground activeProject={isActiveProjectExists ? activeProject : null} aria-hidden />
+      <ThreeBackground activeProject={isActiveProjectExists ? activeProject : null} />
       <Header query={query} setQuery={setQuery} filter={filter} setFilter={setFilter} isContentVisible={isContentVisible} toggleContent={toggleContent} />
       
       <AnimatePresence>
