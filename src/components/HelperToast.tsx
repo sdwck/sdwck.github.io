@@ -92,7 +92,6 @@ export default function HelperToast({ onClose, onExpire, arrowTarget }: HelperTo
         return () => clearTimeout(closeTimer);
     }, [dismissalReason, onClose, onExpire]);
 
-
     return (
         <>
             <AnimatePresence>
@@ -156,22 +155,28 @@ export default function HelperToast({ onClose, onExpire, arrowTarget }: HelperTo
                 animate="animate"
                 exit="exit"
                 onAnimationComplete={() => setIsToastReady(true)}
-                className="fixed right-6 top-20 z-50"
+                className="fixed right-3 top-29 lg:top-18 z-50"
             >
-                <div className="max-w-xs backdrop-blur rounded-2xl p-4 shadow-2xl border border-black/8 dark:border-white/6 bg-white/70 dark:bg-black/40">
-                    <div className="flex items-start gap-3">
-                        <div className="p-2 rounded-full bg-gradient-to-tr from-indigo-500/20 to-fuchsia-500/10">
-                            <Eye size={20} />
+                <div className="max-w-[280px] sm:max-w-xs md:max-w-sm backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border border-black/8 dark:border-white/6 bg-white/90 dark:bg-black/80">
+                    <div className="flex items-start gap-2 sm:gap-3">
+                        <div className="p-1.5 sm:p-2 rounded-full bg-gradient-to-tr from-indigo-500/20 to-fuchsia-500/10 flex-shrink-0">
+                            <Eye size={16} className="sm:w-5 sm:h-5" />
                         </div>
-                        <div className="flex-1">
-                            <div className="font-extrabold text-sm tracking-tight">Quick tip</div>
-                            <div className="text-sm opacity-90 mt-1">
-                                Hovering activates the background. Use <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/5 dark:bg-white/6 font-medium"><Eye size={14} /> / <EyeOff size={14} /></span> button to focus on it.
+                        <div className="flex-1 min-w-0">
+                            <div className="font-extrabold text-xs sm:text-sm tracking-tight">Quick tip</div>
+                            <div className="text-xs sm:text-sm opacity-90 mt-1">
+                                Hovering activates the background. Use <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-black/5 dark:bg-white/6 font-medium whitespace-nowrap">
+                                    <Eye size={12} className="sm:w-3.5 sm:h-3.5" /> / <EyeOff size={12} className="sm:w-3.5 sm:h-3.5" />
+                                </span> button to focus on it.
                             </div>
-                            <div className="mt-3 flex gap-2">
-                                <button onClick={handleGotItClick} className="px-3 py-1 rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer">Got it</button>
+                            <div className="mt-2 sm:mt-3 flex gap-2">
+                                <button 
+                                    onClick={handleGotItClick} 
+                                    className="px-2.5 sm:px-3 py-1 rounded-md sm:rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white text-xs sm:text-sm font-semibold hover:opacity-90 transition-opacity cursor-pointer"
+                                >
+                                    Got it
+                                </button>
                             </div>
-
                         </div>
                     </div>
                 </div>

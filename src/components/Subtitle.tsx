@@ -14,7 +14,7 @@ type SubtitleProps = {
 export function Subtitle({
     phrases,
     className = "",
-    lineHeightRem = 2.0,
+    lineHeightRem = 1.6,
     containerWidth = 60,
     reserveLines = 1,
     pauseMs = 1100,
@@ -30,7 +30,7 @@ export function Subtitle({
     const prefersReducedMotion =
         typeof window !== "undefined" &&
         window.matchMedia &&
-        window.matchMedia("(prevers-reduced-motion: reduce)").matches;
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     useEffect(() => {
         if (prefersReducedMotion) {
@@ -65,40 +65,40 @@ export function Subtitle({
 
     return (
         <div className={["mt-4", className].join(" ")}>
-            <div className="relative">
-                <span className="pointer-events-none absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-500/20 via-fuchsia-500/15 to-amber-500/20 blur-xl" />
+            <div className="relative w-full">
+                <span className="pointer-events-none absolute -inset-1 rounded-xl sm:rounded-2xl bg-gradient-to-r from-indigo-500/20 via-fuchsia-500/15 to-amber-500/20 blur-lg sm:blur-xl" />
                 <div
                     className={[
-                        "relative rounded-2xl",
+                        "relative rounded-xl sm:rounded-2xl",
                         "border border-black/10 dark:border-white/10",
                         "bg-black/5 dark:bg-white/5 backdrop-blur-sm shadow-sm",
-                        "px-4 py-3",
+                        "px-3 py-2.5 sm:px-4 sm:py-3",
+                        "w-full max-w-full overflow-hidden",
                     ].join(" ")}
                     style={{
-                        width: `${containerWidth}ch`,
                         height: reservedHeight,
-                        minWidth: "280px",
-                        maxWidth: "100%",
                     }}
                 >
-                    <div className="flex items-start h-full">
+                    <div className="flex items-start h-full w-full">
                         <span
                             className={[
-                                "font-mono text-lg md:text-xl",
+                                "font-mono text-sm sm:text-base lg:text-lg",
                                 "whitespace-normal break-words overflow-hidden",
                                 "bg-clip-text text-transparent",
                                 "bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-amber-400",
+                                "w-full",
                             ].join(" ")}
                             style={{
                                 lineHeight: `${lineHeightRem}rem`,
                                 wordBreak: "break-word",
                                 whiteSpace: "pre-wrap",
+                                display: "block",
                             }}
                             aria-live="polite"
                         >
                             {phrases[i].slice(0, sub)}
                             <span
-                                className="inline ml-1 font-mono text-lg md:text-xl select-none opacity-80 animate-pulse"
+                                className="inline ml-1 font-mono text-sm sm:text-base lg:text-lg select-none opacity-80 animate-pulse"
                                 aria-hidden="true"
                                 style={{ lineHeight: `${lineHeightRem}rem` }}
                             >
