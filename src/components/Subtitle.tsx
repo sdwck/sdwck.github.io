@@ -15,7 +15,6 @@ export function Subtitle({
     phrases,
     className = "",
     lineHeightRem = 1.6,
-    containerWidth = 60,
     reserveLines = 1,
     pauseMs = 1100,
     typeMs = 42,
@@ -82,7 +81,7 @@ export function Subtitle({
                     <div className="flex items-start h-full w-full">
                         <span
                             className={[
-                                "font-mono text-sm sm:text-base lg:text-lg",
+                                "font-mono text-sm sm:text-base lg:text-xl",
                                 "whitespace-normal break-words overflow-hidden",
                                 "bg-clip-text text-transparent",
                                 "bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-amber-400",
@@ -98,7 +97,7 @@ export function Subtitle({
                         >
                             {phrases[i].slice(0, sub)}
                             <span
-                                className="inline ml-1 font-mono text-sm sm:text-base lg:text-lg select-none opacity-80 animate-pulse"
+                                className="inline ml-1 font-mono text-sm sm:text-base lg:text-xl select-none opacity-80 animate-pulse"
                                 aria-hidden="true"
                                 style={{ lineHeight: `${lineHeightRem}rem` }}
                             >

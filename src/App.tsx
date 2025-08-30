@@ -137,7 +137,7 @@ export default function App() {
         animate={{ opacity: isContentVisible ? 1 : 0 }}
         transition={{ duration: 0.2 }}
         style={{ pointerEvents: isContentVisible ? 'auto' : 'none' }}
-        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-16 sm:pb-24 z-10 relative"
+        className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-16 sm:pb-24 z-10 relative"
       >
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center mb-8 sm:mb-12">
           <div className="order-2 lg:order-1 text-center lg:text-left">
