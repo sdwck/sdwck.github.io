@@ -147,7 +147,7 @@ export const projects: Project[] = [
         title: "SolarTrack",
         stack: ["ASP.NET Core", "React", "TypeScript", "Node.js"],
         blurb: "Monitor and manage your solar panels and connected devices remotely with an intuitive UI.",
-        category: ["web", "iot"],
+        category: ["web", "IoT"],
         screenshots: [
             "/solartrack/1.png",
             "/solartrack/2.png",
