@@ -93,7 +93,7 @@ export function ProjectCard({
     return (
         <motion.div
             layout
-            className="group relative bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow"
+            className="group relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow"
         >
             <div className="aspect-video w-full overflow-hidden">
                 <img
@@ -114,7 +114,7 @@ export function ProjectCard({
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title={p.links.primary.label}
-                                className="p-2 rounded-lg border border-black/10 dark:border-white/10"
+                                className="p-2 rounded-lg border border-white/10"
                             >
                                 <ExternalLink size={16} />
                             </motion.a>
@@ -126,7 +126,7 @@ export function ProjectCard({
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title="GitHub"
-                                className="p-2 rounded-lg border border-black/10 dark:border-white/10"
+                                className="p-2 rounded-lg border border-white/10"
                             >
                                 <Github size={16} />
                             </motion.a>
@@ -136,7 +136,7 @@ export function ProjectCard({
                                 {...interactiveAnim}
                                 onClick={() => onOpenLightbox(p.screenshots, 0)}
                                 title="Gallery"
-                                className="p-2 rounded-lg border border-black/10 dark:border-white/10 cursor-pointer"
+                                className="p-2 rounded-lg border border-white/10 cursor-pointer"
                             >
                                 <Images size={16} />
                             </motion.button>
@@ -179,7 +179,7 @@ export function ProjectCard({
                                         initial={{ opacity: 0, scale: 0.96 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.96 }}
-                                        className="absolute z-50 mt-2 right-0 w-48 rounded-lg shadow-lg bg-white/90 dark:bg-black/80 backdrop-blur p-2"
+                                        className="absolute z-50 mt-2 right-0 w-48 rounded-lg shadow-lg bg-black/80 backdrop-blur p-2"
                                     >
                                         <div className="flex flex-col gap-1">
                                             {hiddenItems.map((s, i) => (
@@ -189,7 +189,7 @@ export function ProjectCard({
                                                         onBadgeClick?.(s);
                                                         setShowHidden(false);
                                                     }}
-                                                    className="text-left text-sm px-2 py-1 rounded hover:bg-black/5 dark:hover:bg-white/5"
+                                                    className="text-left text-sm px-2 py-1 rounded hover:bg-white/5"
                                                 >
                                                     {s.charAt(0).toUpperCase() + s.slice(1)}
                                                 </button>

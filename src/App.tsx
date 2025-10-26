@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { Sparkles, Mail, Laptop, Archive } from "lucide-react";
 import { ProjectCard } from "./components/ProjectCard";
 import { Section } from "./components/Section";
@@ -32,6 +32,7 @@ const bgProjects = ['youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-sal
 
 const subtitlePhrases = [
   "Welcome, I guess? How are your day?\nI am software developer since 2021.",
+  "Or maybeee Welcome to the portfolio\nwith a bunch of AI-generated icons.",
   "Really enjoy working on projects with new\ntech for me and love growing through dev.",
   "I don't really have something to say,\nbut I like making things.",
   "Sweet potatoes | Mashed potatoes\nFried potatoes | Oven potatoes",
@@ -97,7 +98,7 @@ export default function App() {
       setHelloWordIndex((prev) => (prev + 1) % helloWords.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [helloWords.length]);
 
   useEffect(() => {
     startAdventure();
@@ -108,15 +109,15 @@ export default function App() {
       const t = setTimeout(() => setHelperVisible(true), 300);
       return () => clearTimeout(t);
     }
-  }, [activeProject, helperDismissed]);
+  }, [activeProject, helperDismissed, helperExpired]);
 
   const toggleContent = () => setIsContentVisible(v => !v);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-white to-gray-100 dark:from-[#070710] dark:to-[#0b0b12] text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen w-full bg-gradient-to-b from-[#070710] to-[#0b0b12] text-gray-100">
       <ThreeBackground activeProject={isActiveProjectExists ? activeProject : null} />
       <Header query={query} setQuery={setQuery} filter={filter} setFilter={setFilter} isContentVisible={isContentVisible} toggleContent={toggleContent} />
-      
+
       <AnimatePresence>
         {helperVisible && !helperExpired && (
           <HelperToast
@@ -167,19 +168,19 @@ export default function App() {
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row flex-wrap gap-3 justify-center lg:justify-start">
-              <a 
-                href="https://t.me/sdwck" 
-                target="_blank" 
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-2xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/10 text-sm sm:text-base transition-colors hover:bg-black/10 dark:hover:bg-white/20"
+              <a
+                href="https://t.me/sdwck"
+                target="_blank"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-2xl border border-white/10 bg-white/10 text-sm sm:text-base transition-colors hover:bg-white/20"
               >
-                <FaTelegramPlane className="flex-shrink-0" /> 
+                <FaTelegramPlane className="flex-shrink-0" />
                 <span>Send me DM</span>
               </a>
-              <a 
-                href="mailto:sdwcktarakanov@gmail.com" 
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-2xl border border-black/10 dark:border-white/10 text-sm sm:text-base transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+              <a
+                href="mailto:sdwcktarakanov@gmail.com"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-2xl border border-white/10 text-sm sm:text-base transition-colors hover:bg-white/5"
               >
-                <Mail size={16} className="flex-shrink-0" /> 
+                <Mail size={16} className="flex-shrink-0" />
                 <span>Contact</span>
               </a>
             </div>
@@ -188,13 +189,13 @@ export default function App() {
           <div className="relative order-1 lg:order-2">
             <div className="absolute -inset-3 sm:-inset-6 rounded-xl sm:rounded-[2rem] bg-gradient-to-tr from-indigo-500/20 via-fuchsia-500/10 to-amber-500/20 blur-xl sm:blur-2xl" />
             <div
-              className="relative rounded-xl sm:rounded-[2rem] border border-black/10 dark:border-white/10 overflow-hidden shadow-xl sm:shadow-2xl"
+              className="relative rounded-xl sm:rounded-[2rem] border border-white/10 overflow-hidden shadow-xl sm:shadow-2xl"
               style={{ aspectRatio: "3 / 2" }}
             >
-              <img 
-                src="/desk.jpg" 
-                alt="workspace" 
-                className="w-full h-full object-cover" 
+              <img
+                src="/desk.jpg"
+                alt="workspace"
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
             </div>
@@ -285,11 +286,11 @@ export default function App() {
         </section>
       </motion.main>
       <Footer />
-      <Lightbox 
-        open={lightbox.open} 
-        images={lightbox.images} 
-        startIndex={lightbox.index} 
-        onClose={() => setLightbox({ open: false, images: [], index: 0 })} 
+      <Lightbox
+        open={lightbox.open}
+        images={lightbox.images}
+        startIndex={lightbox.index}
+        onClose={() => setLightbox({ open: false, images: [], index: 0 })}
       />
     </div>
   );

@@ -25,7 +25,7 @@ export default function MobileSelect({
         <div className="relative">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/10 text-sm font-medium">
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/8 border border-white/10 text-sm font-medium">
                 <span>{selectedOption?.label || "All"}</span>
                 <ChevronDown
                     size={14}
@@ -46,7 +46,7 @@ export default function MobileSelect({
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -10, scale: 0.95 }}
                             transition={{ duration: 0.15 }}
-                            className="absolute top-full right-0 mt-2 w-32 bg-white dark:bg-gray-900 rounded-xl border border-black/10 dark:border-white/10 shadow-lg z-50"
+                            className="absolute top-full right-0 mt-2 w-32 bg-gray-900 rounded-xl border border-white/10 shadow-lg z-50"
                         >
                             {OPTIONS.map((option) => (
                                 <button
@@ -57,8 +57,8 @@ export default function MobileSelect({
                                     }}
                                     className={`w-full px-3 py-2 text-left text-sm font-medium first:rounded-t-xl last:rounded-b-xl transition-colors
                     ${value === option.key
-                                            ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400'
-                                            : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                                            ? 'bg-indigo-900/30 text-indigo-400'
+                                            : 'hover:bg-gray-800'
                                         }`}
                                 >
                                     {option.label}

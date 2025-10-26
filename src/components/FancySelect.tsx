@@ -19,8 +19,8 @@ export default function FancySelect({
   return (
     <div
       role="tablist"
-      className="relative inline-flex items-center gap-2 p-1 rounded-2xl border border-black/10 dark:border-white/10
-                 bg-gradient-to-br from-black/5 to-black/10 dark:from-white/6 dark:to-white/8
+      className="relative inline-flex items-center gap-2 p-1 rounded-2xl border border-white/10
+                 bg-gradient-to-br from-white/6 to-white/8
                  isolate"
     >
       <AnimatePresence initial={false}>
@@ -37,7 +37,7 @@ export default function FancySelect({
                           focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-transparent
                           ${selected
                             ? "text-white"
-                            : "text-gray-900 dark:text-gray-100 hover:bg-black/[.06] dark:hover:bg-white/[.08]"
+                            : "text-gray-100 hover:bg-white/[.08]"
                           }`}
             >
               <span className={`relative z-10 ${selected ? "drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]" : ""}`}>

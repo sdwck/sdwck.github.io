@@ -83,7 +83,10 @@ export default function HelperToast({ onClose, onExpire, arrowTarget }: HelperTo
         const toastHideDelay = 100;
         const closeTimer = setTimeout(() => {
             if (dismissalReason === 'timer') {
-                onExpire ? onExpire() : onClose();
+                if (onExpire)
+                    onExpire();
+                else
+                    onClose();
             } else {
                 onClose();
             }
@@ -155,7 +158,7 @@ export default function HelperToast({ onClose, onExpire, arrowTarget }: HelperTo
                 onAnimationComplete={() => setIsToastReady(true)}
                 className="fixed right-3 top-29 lg:top-18 z-50"
             >
-                <div className="max-w-[280px] sm:max-w-xs md:max-w-sm backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border border-black/8 dark:border-white/6 bg-white/90 dark:bg-black/80">
+                <div className="max-w-[280px] sm:max-w-xs md:max-w-sm backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border border-white/6 bg-black/80">
                     <div className="flex items-start gap-2 sm:gap-3">
                         <div className="p-1.5 sm:p-2 rounded-full bg-gradient-to-tr from-indigo-500/20 to-fuchsia-500/10 flex-shrink-0">
                             <Eye size={16} className="sm:w-5 sm:h-5" />
@@ -163,7 +166,7 @@ export default function HelperToast({ onClose, onExpire, arrowTarget }: HelperTo
                         <div className="flex-1 min-w-0">
                             <div className="font-extrabold text-xs sm:text-sm tracking-tight">Quick tip</div>
                             <div className="text-xs sm:text-sm opacity-90 mt-1">
-                                Hovering activates the background. Use <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-black/5 dark:bg-white/6 font-medium whitespace-nowrap">
+                                Hovering activates the background. Use <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-white/6 font-medium whitespace-nowrap">
                                     <Eye size={12} className="sm:w-3.5 sm:h-3.5" /> / <EyeOff size={12} className="sm:w-3.5 sm:h-3.5" />
                                 </span> button to focus on it.
                             </div>

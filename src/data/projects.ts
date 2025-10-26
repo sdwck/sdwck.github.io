@@ -5,7 +5,7 @@ export const projects: Project[] = [
         id: "youtube-dm",
         title: "YouTube DM",
         stack: ["TypeScript"],
-        blurb: "A browser extension that integrates a private messaging system into the YouTube interface.",
+        blurb: "A browser extension that reverts the private messaging system to the YouTube.",
         category: ["web", "extension"],
         links: {
             primary: { label: "Chrome Web Store", href: "https://chromewebstore.google.com/detail/youtube-direct-messages/dbkdcdmeokoneaoibbgclfafjikffibm" },
@@ -45,7 +45,7 @@ export const projects: Project[] = [
         id: "mental-reset",
         title: "Mental Reset",
         stack: ["React Native"],
-        blurb: "Rest and recover with breath counting, nature sounds, and meditative music.",
+        blurb: "Rest with breath counting, nature sounds, and meditative music. Primitive learning project.",
         category: ["mobile"],
         links: {
             // primary: { label: "Google Play", href: "https://example.com/google-play-mental-reset" },
@@ -62,7 +62,7 @@ export const projects: Project[] = [
             "/mental-reset/9.png",
             "/mental-reset/cover.png",
         ],
-        tags: ["Rest", "Expo"],
+        tags: ["Rest", "Expo", "CantPassInternalTesting"],
         status: "released",
     },
     {
@@ -87,7 +87,7 @@ export const projects: Project[] = [
         id: "nail-salon",
         title: "Nail Salon App",
         stack: ["Next.js", "React", "TypeScript"],
-        blurb: "A real-world nail salon app with online booking and a gallery of completed works.",
+        blurb: "A nail salon app with online booking and a gallery of works. Quite generic.",
         category: ["web", "bots"],
         links: {},
         screenshots: [
@@ -106,7 +106,7 @@ export const projects: Project[] = [
         id: "moviebot",
         title: "MovieBot",
         stack: ["C#", "ASP.NET Core"],
-        blurb: "Search movies and get recommendations right in Telegram.",
+        blurb: "Search movies and get recommendations right in Telegram. Powered by TMDB.",
         category: ["bots"],
         links: {
             primary: { label: "Telegram Bot", href: "https://t.me/movie_knl_bot" },
@@ -125,7 +125,7 @@ export const projects: Project[] = [
             "/moviebot/11.png",
             "/moviebot/cover.png",
         ],
-        tags: ["Telegram", "Rest"],
+        tags: ["Telegram", "Rest", "Forced"],
         status: "released",
     },
     {
@@ -146,15 +146,16 @@ export const projects: Project[] = [
         id: "solartrack",
         title: "SolarTrack",
         stack: ["ASP.NET Core", "React", "TypeScript", "Node.js"],
-        blurb: "Monitor and manage your solar panels and connected devices remotely with an intuitive UI.",
+        blurb: "A boring app that allows reading data from solar panels and shows a kind of useful statistics.",
         category: ["web", "IoT"],
         screenshots: [
             "/solartrack/1.png",
             "/solartrack/2.png",
             "/solartrack/3.png",
+            "/solartrack/4.png",
             "/solartrack/cover.png",
         ],
-        tags: ["IoT", "Solar", "Monitoring"],
+        tags: ["IoT", "Forced", "Monitoring"],
         status: "development",
     },
     {
@@ -187,7 +188,7 @@ export const projects: Project[] = [
             "/bytecore/cover.png",
         ],
         category: ["web"],
-        tags: ["Education", "IT"],
+        tags: ["Education", "IT", "Forced"],
         status: "archived",
     },
     {
