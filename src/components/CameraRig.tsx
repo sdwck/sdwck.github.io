@@ -11,6 +11,7 @@ const PROJECT_POSITIONS: Record<string, THREE.Vector3> = {
     'nail-salon': new THREE.Vector3(0, 0, 32),
     'moviebot': new THREE.Vector3(0, 0, 1),
     'trail-shade': new THREE.Vector3(0, 0, 25),
+    'solartrack': new THREE.Vector3(0, 2, 28),
 };
 
 function easeInOutCubic(t: number) {

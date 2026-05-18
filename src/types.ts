@@ -18,6 +18,18 @@ export type Project = {
   status: ProjectStatus;
 };
 
+export type WorkExperience = {
+  id: string;
+  role: string;
+  company: string;
+  location: string;
+  startDate: Date;
+  endDate: Date | null;
+  bullets: string[];
+  stack: Stack[] | string[];
+  category: Category[];
+};
+
 export type ProjectStatus = "development" | "archived" | "released";
 export type Category = "all" | "web" | "mobile" | "desktop" | "bots" | "extension" | "IoT";
 export type Stack = "TypeScript" | "React" | "React Native" | "Next.js" | "Node.js" | "Electron" | "C#" | "ASP.NET Core" | "ASP.NET MVC";

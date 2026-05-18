@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
-import { Sparkles, Mail, Laptop, Archive } from "lucide-react";
+import { Sparkles, Mail, Laptop, Archive, Briefcase, Clock } from "lucide-react";
 import { ProjectCard } from "./components/ProjectCard";
 import { Section } from "./components/Section";
 import { Lightbox } from "./components/Lightbox";
@@ -9,13 +9,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import ThreeBackground from "./components/ThreeBackground";
 import { FaTelegramPlane } from "react-icons/fa";
 import Footer from "./components/Footer";
-import { type Category } from "./types";
+import { type Category, type WorkExperience } from "./types";
 import { gatherUserFacts } from "./utils/userFacts";
 import Header from "./components/Header";
 import useLocalStorage from "./hooks/useLocalStorage";
 import HelperToast from "./components/HelperToast";
 import { startAdventure } from "./utils/startAdventure";
 import { Subtitle } from "./components/Subtitle";
+import { Badge } from "./components/Badge";
+import { workExperiences } from "./data/work";
 
 const isProjectMatchesFilters = (p: typeof projects[number], query: string, filter: Category) => {
   const matchesFilter = filter === "all" || p.category.includes(filter);
@@ -28,15 +30,24 @@ const isProjectMatchesFilters = (p: typeof projects[number], query: string, filt
   return matchesFilter && matchesQuery;
 }
 
-const bgProjects = ['youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-salon', 'moviebot', 'trail-shade'];
+const isWorkMatchesFilters = (w: WorkExperience, query: string, filter: Category) => {
+  const matchesFilter = filter === "all" || w.category.includes(filter);
+  const normalizedQuery = query.toLowerCase().trim();
+  const matchesQuery =
+    w.role.toLowerCase().includes(normalizedQuery) ||
+    w.company.toLowerCase().includes(normalizedQuery) ||
+    w.bullets.some(b => b.toLowerCase().includes(normalizedQuery)) ||
+    w.stack.some(tech => tech.toLowerCase().includes(normalizedQuery));
+  return matchesFilter && matchesQuery;
+}
+
+const bgProjects = ['youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-salon', 'moviebot', 'trail-shade', 'solartrack'];
 
 const subtitlePhrases = [
-  "Welcome, I guess? How are your day?\nI am software developer since 2021.",
+  "Welcome, I guess? How is your day?\nI'm a software developer since 2021.",
   "Or maybeee Welcome to the portfolio\nwith a bunch of AI-generated icons.",
-  "Really enjoy working on projects with new\ntech for me and love growing through dev.",
-  "I don't really have something to say,\nbut I like making things.",
-  "Sweet potatoes | Mashed potatoes\nFried potatoes | Oven potatoes",
-  "gsap.to('.gallows',{opacity:1,duration:1})\ngsap.to('.the-bun',{y:-100,duration:2})",
+  "Really enjoy working with new tech\nand growing through development.",
+  "I don't really have something to say,\nbut I like making things."
 ];
 
 export default function App() {
@@ -59,6 +70,7 @@ export default function App() {
   );
 
   const filtered = useMemo(() => projects.filter(p => isProjectMatchesFilters(p, query, filter)), [query, filter]);
+  const filteredWork = useMemo(() => workExperiences.filter(w => isWorkMatchesFilters(w, query, filter)), [query, filter]);
 
   const openLightbox = (images: string[], index = 0) => setLightbox({ open: true, images, index });
 
@@ -201,6 +213,87 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <AnimatePresence>
+          {filteredWork.length > 0 && (
+            <motion.section
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              className="mb-12 sm:mb-16 mt-8"
+            >
+              <Section title="Work Experience" icon={Briefcase}>
+                <div className="flex flex-col gap-6">
+                  {filteredWork.map((work) => (
+                    <div key={work.id} className="p-5 sm:p-6 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl hover:shadow-xl transition-shadow">
+                      <div className="flex justify-between items-start flex-wrap gap-4">
+                        <div>
+                          <h3 className="text-xl sm:text-2xl font-bold tracking-tight">{work.role}</h3>
+                          <p className="text-indigo-400 font-medium mt-1">
+                            {work.company} <span className="text-gray-400 text-sm">({work.location})</span>
+                          </p>
+                        </div>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+                          {work.startDate && (
+                            <div className="flex items-center gap-1.5 text-sm font-medium text-emerald-400 border border-emerald-400/20 bg-emerald-400/10 px-3 py-1.5 rounded-full whitespace-nowrap">
+                              <Clock size={14} />
+                              <span>
+                                {(() => {
+                                  const start = new Date(work.startDate);
+                                  const end = work.endDate ? new Date(work.endDate) : new Date();
+
+                                  const months =
+                                    (end.getFullYear() - start.getFullYear()) * 12 +
+                                    (end.getMonth() - start.getMonth());
+
+                                  return `${months} ${months === 1 ? "month" : "months"}`;
+                                })()}
+                              </span>
+                            </div>
+                          )}
+
+                          <div className="text-sm font-semibold border border-white/10 bg-white/5 px-3 py-1.5 rounded-full whitespace-nowrap">
+                            {work.startDate &&
+                              `${new Date(work.startDate).toLocaleString("en-US", {
+                                month: "short",
+                                year: "numeric",
+                              })} - ${work.endDate
+                                ? new Date(work.endDate).toLocaleString("en-US", {
+                                  month: "short",
+                                  year: "numeric",
+                                })
+                                : "Present"
+                              }`}
+                          </div>
+                        </div>
+                      </div>
+
+                      <ul className="mt-5 space-y-3 opacity-80 text-sm sm:text-base leading-relaxed list-disc list-outside pl-5 marker:text-indigo-500">
+                        {work.bullets.map((bullet, idx) => (
+                          <li key={idx}>{bullet}</li>
+                        ))}
+                      </ul>
+
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {work.stack.map(tech => (
+                          <div
+                            key={tech}
+                            onClick={() => onBadgeClick(tech)}
+                            className="cursor-pointer hover:scale-105 transition-transform"
+                          >
+                            <Badge>{tech}</Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+            </motion.section>
+          )}
+        </AnimatePresence>
 
         <section id="projects" className="space-y-8 sm:space-y-10">
           {filtered.filter(p => p.status === 'released').length > 0 && (

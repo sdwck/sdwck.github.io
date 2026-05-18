@@ -10,6 +10,7 @@ import { Suspense, useState } from 'react';
 import LoadWatcher from './LoadWatcher';
 import { useEffect } from 'react';
 import TrailShadePolygons from './particles/TrailShadePolygons';
+import SolarTrackParticles from './particles/SolarTrackParticles';
 
 type Props = { activeProject: string | null };
 
@@ -45,6 +46,7 @@ export default function ThreeBackground({ activeProject }: Props) {
                 <InstancedModelsField activeProject={activeProject} />
                 <MentalBreather active={activeProject === 'mental-reset'} />
                 <VoxWavefield active={activeProject === 'voxnl'} />
+                <SolarTrackParticles active={activeProject === 'solartrack'} />
 
                 <TrailShadePolygons active={activeProject === 'trail-shade'} />
 
