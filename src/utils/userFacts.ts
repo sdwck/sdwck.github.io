@@ -24,8 +24,20 @@ const demonyms: Record<string, string> = {
     KR: 'Korean', TW: 'Taiwanese', HK: 'Hongkonger', MO: 'Macanese'
 };
 
+export const gatherUserFactStarters = (): string[] => {
+    const starters: string[] = [];
+
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) starters.push('Good morning,');
+    else if (hour >= 12 && hour < 18) starters.push('Good afternoon,');
+    else if (hour >= 18 && hour < 23) starters.push('Good evening,');
+    else starters.push('Good night,');
+
+    return starters;
+}
+
 export const gatherUserFacts = async (): Promise<string[]> => {
-    const facts: string[] = [];
+    const facts: string[] = ["friend"];
 
     try {
         const response = await fetch('https://ipwhois.app/json/');
@@ -43,27 +55,34 @@ export const gatherUserFacts = async (): Promise<string[]> => {
         }
     } catch (e) { }
 
-    try {
-        const langCode = navigator.language.split('-')[0];
-        const langName = new Intl.DisplayNames(['en'], { type: 'language' }).of(langCode);
-        if (langName) facts.push(langName);
-    } catch (e) { }
-
     const device = rdd.deviceDetect(navigator.userAgent);
-    if (device.browserName) facts.push(device.browserName);
-    if (device.osName) facts.push(device.osName);
-
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour < 12) facts.push('morning');
-    else if (hour >= 12 && hour < 18) facts.push('day');
-    else if (hour >= 18 && hour < 23) facts.push('evening');
-    else facts.push('nightly');
+    if (device.browserName) facts.push(`${device.browserName} user`);
+    if (device.osName) facts.push(`${device.osName} user`);
 
     if (document.referrer) {
-        const hostname = new URL(document.referrer).hostname;
-        if (hostname.includes('google')) facts.push('Google');
-        else if (hostname.includes('github')) facts.push('GitHub');
-        else if (hostname.includes('t.me')) facts.push('Telegram');
+        const hostname = new URL(document.referrer).hostname.toLowerCase();
+        let ref = null;
+        if (hostname.includes('google')) ref = 'Google';
+        else if (hostname.includes('github')) ref = 'GitHub';
+        else if (hostname.includes('t.me') || hostname.includes('telegram')) ref = 'Telegram';
+        else if (hostname.includes('youtube')) ref = 'YouTube';
+        else if (hostname.includes('twitter') || hostname.includes('x.com')) ref = 'Twitter';
+        else if (hostname.includes('facebook')) ref = 'Facebook';
+        else if (hostname.includes('instagram')) ref = 'Instagram';
+        else if (hostname.includes('reddit')) ref = 'Reddit';
+        else if (hostname.includes('linkedin')) ref = 'LinkedIn';
+        else if (hostname.includes('vk.com')) ref = 'VK';
+        else if (hostname.includes('discord')) ref = 'Discord';
+        else if (hostname.includes('stackoverflow')) ref = 'Stack Overflow';
+        else if (hostname.includes('medium')) ref = 'Medium';
+        else if (hostname.includes('yandex')) ref = 'Yandex';
+        else if (hostname.includes('bing')) ref = 'Bing';
+        else if (hostname.includes('duckduckgo')) ref = 'DuckDuckGo';
+        else if (hostname.includes('pinterest')) ref = 'Pinterest';
+        else if (hostname.includes('quora')) ref = 'Quora';
+        else if (hostname.includes('tiktok')) ref = 'TikTok';
+
+        if (ref) facts.push(`user from ${ref}`)
     }
 
     return facts;

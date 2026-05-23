@@ -21,6 +21,7 @@ export const projects: Project[] = [
         ],
         tags: ["Social", "YouTube", "Firebase"],
         status: "released",
+        isFeatured: true
     },
     {
         id: "unlinknl",
@@ -40,6 +41,7 @@ export const projects: Project[] = [
         ],
         tags: ["Steam", "Gaming"],
         status: "released",
+        isFeatured: true
     },
     {
         id: "mental-reset",
@@ -64,6 +66,7 @@ export const projects: Project[] = [
         ],
         tags: ["Rest", "Expo"],
         status: "released",
+        isFeatured: false
     },
     {
         id: "nail-salon",
@@ -83,6 +86,7 @@ export const projects: Project[] = [
         ],
         tags: ["Business", "Telegram"],
         status: "released",
+        isFeatured: false
     },
     {
         id: "solartrack",
@@ -102,6 +106,7 @@ export const projects: Project[] = [
         ],
         tags: ["IoT", "Monitoring"],
         status: "released",
+        isFeatured: true
     },
     {
         id: "trail-shade",
@@ -116,6 +121,7 @@ export const projects: Project[] = [
         ],
         tags: ["Maps", "Rest", "Social", "Expo"],
         status: "archived",
+        isFeatured: true
     },
     {
         id: "voxnl",
@@ -124,7 +130,7 @@ export const projects: Project[] = [
         blurb: "Convert any book or document to audio. Read and listen together with SRT subtitles.",
         category: ["web", "mobile", "bots"],
         links: {
-            primary: { label: "Telegram Bot", href: "https://t.me/VoxNL_bot" },
+            // primary: { label: "Telegram Bot", href: "https://t.me/VoxNL_bot" },
         },
         screenshots: [
             "/voxnl/1.png",
@@ -134,6 +140,7 @@ export const projects: Project[] = [
         ],
         tags: ["TTS", "Telegram", "Multiplatform"],
         status: "archived",
+        isFeatured: true
     },
     {
         id: "moviebot",
@@ -158,6 +165,7 @@ export const projects: Project[] = [
         ],
         tags: ["Telegram", "Rest"],
         status: "archived",
+        isFeatured: true
     },
     {
         id: "flower-garden",
@@ -173,6 +181,7 @@ export const projects: Project[] = [
         category: ["web", "bots"],
         tags: ["Business", "Telegram"],
         status: "archived",
+        isFeatured: false
     },
     {
         id: "bytecore",
@@ -191,6 +200,7 @@ export const projects: Project[] = [
         category: ["web"],
         tags: ["Education", "IT"],
         status: "archived",
+        isFeatured: false
     },
     {
         id: "bnl",
@@ -208,6 +218,7 @@ export const projects: Project[] = [
         category: ["web"],
         tags: ["Gaming", "Business"],
         status: "archived",
+        isFeatured: false
     },
 ];
 

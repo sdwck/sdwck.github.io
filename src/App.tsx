@@ -1,16 +1,16 @@
-import { Suspense, useEffect, useMemo, useState } from "react";
-import { Sparkles, Mail, Laptop, Archive, Briefcase, Clock } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Sparkles, Mail, Laptop, Archive, Briefcase } from "lucide-react";
 import { ProjectCard } from "./components/ProjectCard";
 import { Section } from "./components/Section";
 import { Lightbox } from "./components/Lightbox";
 import { projects } from "./data/projects";
-import { helloWords as initialWords, randomTitle } from "./utils/random";
+import { randomTitle } from "./utils/random";
 import { AnimatePresence, motion } from "framer-motion";
 import ThreeBackground from "./components/ThreeBackground";
 import { FaTelegramPlane } from "react-icons/fa";
 import Footer from "./components/Footer";
 import { type Category, type WorkExperience } from "./types";
-import { gatherUserFacts } from "./utils/userFacts";
+import { gatherUserFacts, gatherUserFactStarters } from "./utils/userFacts";
 import Header from "./components/Header";
 import useLocalStorage from "./hooks/useLocalStorage";
 import HelperToast from "./components/HelperToast";
@@ -44,10 +44,10 @@ const isWorkMatchesFilters = (w: WorkExperience, query: string, filter: Category
 const bgProjects = ['youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-salon', 'moviebot', 'trail-shade', 'solartrack'];
 
 const subtitlePhrases = [
-  "Welcome, I guess? How is your day?\nI'm a software developer since 2021.",
-  "Or maybeee Welcome to the portfolio\nwith a bunch of AI-generated icons.",
-  "Really enjoy working with new tech\nand growing through development.",
-  "I don't really have something to say,\nbut I like making things."
+  "Software Engineer specializing\nin .NET and Python ecosystems.",
+  "Building scalable backend systems\nand resilient infrastructure.",
+  "Turning complex business logic\ninto clean, maintainable code.",
+  "Experienced with Docker, CI/CD,\nand Event-Driven Architecture."
 ];
 
 export default function App() {
@@ -57,7 +57,8 @@ export default function App() {
   const [lightbox, setLightbox] = useState<{ open: boolean; images: string[]; index: number }>({ open: false, images: [], index: 0 });
   const [isContentVisible, setIsContentVisible] = useState(true);
 
-  const [helloWords, setHelloWords] = useState(initialWords);
+  const [starterWord, setStarterWord] = useState("Hello");
+  const [helloWords, setHelloWords] = useState(["friend"]);
   const [helloWordIndex, setHelloWordIndex] = useState(0);
 
   const [helperDismissed, setHelperDismissed] = useLocalStorage<boolean>('eyeHelper.dismissed', false);
@@ -96,9 +97,12 @@ export default function App() {
 
   useEffect(() => {
     const fetchAndSetUserFacts = async () => {
+      const starters = gatherUserFactStarters();
+      if (starters.length > 0)
+        setStarterWord(starters[Math.floor(Math.random() * starters.length)]);
       const userFacts = await gatherUserFacts();
       if (userFacts.length > 0) {
-        const combinedWords = [...initialWords, ...userFacts].sort(() => 0.5 - Math.random());
+        const combinedWords = [...userFacts].sort(() => 0.5 - Math.random());
         setHelloWords(combinedWords);
       }
     };
@@ -154,8 +158,8 @@ export default function App() {
       >
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center mb-8 sm:mb-12">
           <div className="order-2 lg:order-1 text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight flex flex-row items-center justify-center lg:justify-start gap-2 flex-wrap">
-              <span>Hello</span>{" "}
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight flex flex-row items-center justify-center lg:justify-start gap-2 flex-wrap">
+              <span>{starterWord}</span>{" "}
               <span className="inline-block align-baseline">
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -236,7 +240,7 @@ export default function App() {
                           </p>
                         </div>
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
-                          {work.startDate && (
+                          {/* {work.startDate && (
                             <div className="flex items-center gap-1.5 text-sm font-medium text-emerald-400 border border-emerald-400/20 bg-emerald-400/10 px-3 py-1.5 rounded-full whitespace-nowrap">
                               <Clock size={14} />
                               <span>
@@ -252,7 +256,7 @@ export default function App() {
                                 })()}
                               </span>
                             </div>
-                          )}
+                          )} */}
 
                           <div className="text-sm font-semibold border border-white/10 bg-white/5 px-3 py-1.5 rounded-full whitespace-nowrap">
                             {work.startDate &&
@@ -296,11 +300,38 @@ export default function App() {
         </AnimatePresence>
 
         <section id="projects" className="space-y-8 sm:space-y-10">
-          {filtered.filter(p => p.status === 'released').length > 0 && (
+          {filtered.filter(p => p.isFeatured).length > 0 && (
+            <AnimatePresence>
+              <Section title="Featured" icon={Laptop}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {filtered.filter(p => p.isFeatured).map((p) => (
+                    <motion.div
+                      key={p.id}
+                      onMouseEnter={() => setActiveProject(p.id)}
+                      onTouchStart={() => setActiveProject(p.id)}
+                      layout
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <ProjectCard
+                        p={p}
+                        onOpenLightbox={openLightbox}
+                        onBadgeClick={onBadgeClick}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </Section>
+            </AnimatePresence>
+          )}
+
+          {filtered.filter(p => p.status === 'released' && !p.isFeatured).length > 0 && (
             <AnimatePresence>
               <Section title="Released" icon={Sparkles}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {filtered.filter(p => p.status === 'released').map((p) => (
+                  {filtered.filter(p => p.status === 'released' && !p.isFeatured).map((p) => (
                     <motion.div
                       key={p.id}
                       onMouseEnter={() => setActiveProject(p.id)}
@@ -323,11 +354,11 @@ export default function App() {
             </AnimatePresence>
           )}
 
-          {filtered.filter(p => p.status === 'development').length > 0 && (
+          {filtered.filter(p => p.status === 'development' && !p.isFeatured).length > 0 && (
             <AnimatePresence>
               <Section title="Development" icon={Laptop}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {filtered.filter(p => p.status === 'development').map((p) => (
+                  {filtered.filter(p => p.status === 'development' && !p.isFeatured).map((p) => (
                     <motion.div
                       key={p.id}
                       onMouseEnter={() => setActiveProject(p.id)}
@@ -350,11 +381,11 @@ export default function App() {
             </AnimatePresence>
           )}
 
-          {filtered.filter(p => p.status === 'archived').length > 0 && (
+          {filtered.filter(p => p.status === 'archived' && !p.isFeatured).length > 0 && (
             <AnimatePresence>
               <Section title="Archived" icon={Archive}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {filtered.filter(p => p.status === 'archived').map((p) => (
+                  {filtered.filter(p => p.status === 'archived' && !p.isFeatured).map((p) => (
                     <motion.div
                       key={p.id}
                       onMouseEnter={() => setActiveProject(p.id)}

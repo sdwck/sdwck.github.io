@@ -9,6 +9,7 @@ export type Project = {
   stack: Stack[];
   blurb: string;
   category: Category[];
+  isFeatured: boolean;
   links?: {
     primary?: ProjectLink;
     github?: ProjectLink;

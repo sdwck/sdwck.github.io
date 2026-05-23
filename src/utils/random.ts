@@ -1,4 +1,3 @@
-export const helloWords = ["there", "world", "friend"];
 export function randomQuote(): string {
     const quotes = [
         "solitude_text",
