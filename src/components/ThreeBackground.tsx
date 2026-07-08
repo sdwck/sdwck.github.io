@@ -11,6 +11,7 @@ import LoadWatcher from './LoadWatcher';
 import { useEffect } from 'react';
 import TrailShadePolygons from './particles/TrailShadePolygons';
 import SolarTrackParticles from './particles/SolarTrackParticles';
+import ToggleMeshParticles from './particles/ToggleMeshParticles';
 
 type Props = { activeProject: string | null };
 
@@ -47,6 +48,7 @@ export default function ThreeBackground({ activeProject }: Props) {
                 <MentalBreather active={activeProject === 'mental-reset'} />
                 <VoxWavefield active={activeProject === 'voxnl'} />
                 <SolarTrackParticles active={activeProject === 'solartrack'} />
+                <ToggleMeshParticles active={activeProject === 'togglemesh'} />
 
                 <TrailShadePolygons active={activeProject === 'trail-shade'} />
 

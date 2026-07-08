@@ -2,6 +2,23 @@ import type { Project } from "../types";
 
 export const projects: Project[] = [
     {
+        id: "togglemesh",
+        title: "ToggleMesh",
+        stack: ["C#", ".NET", "React", "TypeScript", "PostgreSQL", "Redis"],
+        blurb: "A scalable feature flag and experimentation platform built with modern enterprise patterns.",
+        category: ["web"],
+        links: {
+            github: { label: "GitHub", href: "https://github.com/sdwck/ToggleMesh" },
+        },
+        screenshots: [
+            ...Array.from({ length: 27 }, (_, i) => `/togglemesh/${i + 1}.png`),
+            "/togglemesh/cover.png"
+        ],
+        tags: ["FeatureFlags", "ABTesting", "Enterprise", "DataPlane"],
+        status: "development",
+        isFeatured: true
+    },
+    {
         id: "youtube-dm",
         title: "YouTube DM",
         stack: ["TypeScript"],

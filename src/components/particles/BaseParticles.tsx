@@ -83,7 +83,7 @@ export default function BaseParticles({ activeProject }: { activeProject: string
     const points = pointsRef.current;
     if (!points || !materialRef.current) return;
 
-    const hideFor = activeProject === 'unlinknl' || activeProject === 'mental-reset' || activeProject === 'voxnl' || activeProject === 'nail-salon' || activeProject === 'moviebot';
+    const hideFor = activeProject === 'togglemesh' || activeProject === 'unlinknl' || activeProject === 'mental-reset' || activeProject === 'voxnl' || activeProject === 'nail-salon' || activeProject === 'moviebot';
     const targetOpacity = hideFor ? 0 : 0.85;
     materialRef.current.opacity += (targetOpacity - materialRef.current.opacity) * delta * 5;
     points.visible = materialRef.current.opacity > 0.01;

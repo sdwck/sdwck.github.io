@@ -17,6 +17,15 @@ export function Lightbox({ open, images, startIndex = 0, onClose }: { open: bool
     return () => window.removeEventListener("keydown", onKey);
   }, [open, images.length, onClose]);
 
+  useEffect(() => {
+    if (!open || images.length === 0) return;
+    for (let i = 1; i <= 3; i++) {
+      const preloadIdx = (idx + i) % images.length;
+      const img = new Image();
+      img.src = images[preloadIdx];
+    }
+  }, [open, idx, images]);
+
   if (!open) return null;
 
   const prev = () => setIdx((i) => (i - 1 + images.length) % images.length);

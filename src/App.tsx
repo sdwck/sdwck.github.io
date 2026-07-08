@@ -41,7 +41,7 @@ const isWorkMatchesFilters = (w: WorkExperience, query: string, filter: Category
   return matchesFilter && matchesQuery;
 }
 
-const bgProjects = ['youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-salon', 'moviebot', 'trail-shade', 'solartrack'];
+const bgProjects = ['togglemesh', 'youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-salon', 'moviebot', 'trail-shade', 'solartrack'];
 
 const subtitlePhrases = [
   "Software Engineer specializing\nin .NET and Python ecosystems.",
