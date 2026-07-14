@@ -41,6 +41,20 @@ const isWorkMatchesFilters = (w: WorkExperience, query: string, filter: Category
   return matchesFilter && matchesQuery;
 }
 
+const formatText = (text: string) => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={i} className="font-bold text-white opacity-100 group-hover:text-indigo-300 transition-colors">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return part;
+  });
+};
+
 const bgProjects = ['togglemesh', 'youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-salon', 'moviebot', 'trail-shade', 'solartrack'];
 
 const subtitlePhrases = [
@@ -276,7 +290,7 @@ export default function App() {
 
                       <ul className="mt-5 space-y-3 opacity-80 text-sm sm:text-base leading-relaxed list-disc list-outside pl-5 marker:text-indigo-500">
                         {work.bullets.map((bullet, idx) => (
-                          <li key={idx}>{bullet}</li>
+                          <li key={idx}>{formatText(bullet)}</li>
                         ))}
                       </ul>
 
