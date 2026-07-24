@@ -3,13 +3,13 @@ import type { WorkExperience } from "../types";
 export const workExperiences: WorkExperience[] = [
   {
     id: "independent-architect",
-    role: "Independent Backend Architect & Consultant",
-    company: "Self-employed / Open Source",
+    role: "Product Engineer",
+    company: "Independent Contractor / Open Source",
     location: "Remote",
     startDate: new Date(2023, 0),
     endDate: null,
     bullets: [
-      "Architected and developed **ToggleMesh**, an enterprise-grade feature flag and contextual experimentation engine capable of processing 100k+ RPS.",
+      "Architected and developed **ToggleMesh**, an enterprise-grade feature flag and contextual experimentation engine capable of processing 115,000+ RPS.",
       "Implemented a **zero-allocation** evaluation engine using C# Source Generators, compiled Expression Trees, and low-level memory management (Span<T>, ref structs).",
       "Designed high-throughput analytics pipelines leveraging **Kafka** for event streaming and **ClickHouse** for real-time OLAP reporting.",
       "Built a Contextual Multi-Armed Bandit (MAB) engine using Bayesian inference to automate traffic shifting toward winning experiment variants.",

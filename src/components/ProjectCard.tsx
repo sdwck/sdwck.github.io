@@ -93,8 +93,13 @@ export function ProjectCard({
     return (
         <motion.div
             layout
-            className="group relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow"
+            className={`group relative bg-black/40 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all ${p.id === 'togglemesh' ? 'border-2 border-indigo-500/50 shadow-indigo-500/20 hover:border-indigo-400' : 'border border-white/10'}`}
         >
+            {p.id === 'togglemesh' && (
+                <div className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide border border-amber-400/50 bg-amber-950/90 text-amber-300 backdrop-blur-md shadow-lg flex items-center gap-1">
+                    <span>★ Flagship System (115K+ RPS)</span>
+                </div>
+            )}
             <div className="aspect-video w-full overflow-hidden">
                 <img
                     src={p.screenshots?.find((url) => url.includes("cover.")) ?? p.screenshots?.[0]}

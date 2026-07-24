@@ -15,8 +15,6 @@ const GAME_MODELS = [
   { path: '/unlink-nl/ds3.glb', baseScale: 0.002 },
 ];
 
-GAME_MODELS.forEach((m) => useGLTF.preload(m.path));
-
 type GLTFResult = GLTF & {
   nodes: { [key: string]: THREE.Mesh };
   materials: { [key: string]: THREE.Material };

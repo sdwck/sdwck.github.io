@@ -41,6 +41,24 @@ export const projects: Project[] = [
         isFeatured: true
     },
     {
+        id: "chromemod",
+        title: "ChromeMod",
+        stack: ["Python"],
+        blurb: "Declarative Chrome WebUI patcher that modifies internal resources.pak using JSON manifests.",
+        category: ["desktop"],
+        links: {
+            github: { label: "GitHub", href: "https://github.com/sdwck/ChromeMod" },
+        },
+        screenshots: [
+            "/chromemod/1.png",
+            "/chromemod/2.png",
+            "/chromemod/cover.png",
+        ],
+        tags: ["Chrome", "Patcher", "WebUI", "Python", "Windows"],
+        status: "released",
+        isFeatured: true
+    },
+    {
         id: "unlinknl",
         title: "UnlinkNL",
         stack: ["C#", "Electron", "React", "Next.js"],
@@ -138,7 +156,7 @@ export const projects: Project[] = [
         ],
         tags: ["Maps", "Rest", "Social", "Expo"],
         status: "archived",
-        isFeatured: true
+        isFeatured: false
     },
     {
         id: "voxnl",
@@ -182,7 +200,7 @@ export const projects: Project[] = [
         ],
         tags: ["Telegram", "Rest"],
         status: "archived",
-        isFeatured: true
+        isFeatured: false
     },
     {
         id: "flower-garden",

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Sparkles, Mail, Laptop, Archive, Briefcase } from "lucide-react";
+import { Sparkles, Mail, Laptop, Archive, Briefcase, Activity, Layers, Award } from "lucide-react";
 import { ProjectCard } from "./components/ProjectCard";
 import { Section } from "./components/Section";
 import { Lightbox } from "./components/Lightbox";
@@ -7,7 +7,7 @@ import { projects } from "./data/projects";
 import { randomTitle } from "./utils/random";
 import { AnimatePresence, motion } from "framer-motion";
 import ThreeBackground from "./components/ThreeBackground";
-import { FaTelegramPlane } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import Footer from "./components/Footer";
 import { type Category, type WorkExperience } from "./types";
 import { gatherUserFacts, gatherUserFactStarters } from "./utils/userFacts";
@@ -18,6 +18,7 @@ import { startAdventure } from "./utils/startAdventure";
 import { Subtitle } from "./components/Subtitle";
 import { Badge } from "./components/Badge";
 import { workExperiences } from "./data/work";
+import HeroTerminalWidget from "./components/HeroTerminalWidget";
 
 const isProjectMatchesFilters = (p: typeof projects[number], query: string, filter: Category) => {
   const matchesFilter = filter === "all" || p.category.includes(filter);
@@ -55,13 +56,13 @@ const formatText = (text: string) => {
   });
 };
 
-const bgProjects = ['togglemesh', 'youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-salon', 'moviebot', 'trail-shade', 'solartrack'];
+const bgProjects = ['togglemesh', 'chromemod', 'youtube-dm', 'unlinknl', 'mental-reset', 'voxnl', 'nail-salon', 'moviebot', 'trail-shade', 'solartrack'];
 
 const subtitlePhrases = [
-  "Software Engineer specializing\nin .NET and Python ecosystems.",
-  "Building scalable backend systems\nand resilient infrastructure.",
-  "Turning complex business logic\ninto clean, maintainable code.",
-  "Experienced with Docker, CI/CD,\nand Event-Driven Architecture."
+  "Software Engineer who ships\nend-to-end — from infra to UI.",
+  "Built ToggleMesh: 115,000+ RPS,\nsub-30ns latency, zero allocations.",
+  "C#, .NET, React, TypeScript,\nDocker, AWS & everything in between.",
+  "Vertical Slice Architecture, CQRS,\nEvent-Driven & Modular Monoliths."
 ];
 
 export default function App() {
@@ -78,6 +79,12 @@ export default function App() {
   const [helperDismissed, setHelperDismissed] = useLocalStorage<boolean>('eyeHelper.dismissed', false);
   const [helperExpired, setHelperExpired] = useState(false);
   const [helperVisible, setHelperVisible] = useState(false);
+
+  const dynamicExpYears = useMemo(() => {
+    const earliest = Math.min(...workExperiences.map(w => w.startDate ? new Date(w.startDate).getTime() : new Date(2023, 0).getTime()));
+    const years = (Date.now() - earliest) / (1000 * 60 * 60 * 24 * 365.25);
+    return `${years.toFixed(1)}+`;
+  }, []);
 
   const isActiveProjectExists = useMemo(
     () => !!activeProject && bgProjects.includes(activeProject),
@@ -172,18 +179,18 @@ export default function App() {
       >
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center mb-8 sm:mb-12">
           <div className="order-2 lg:order-1 text-center lg:text-left">
-            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight flex flex-row items-center justify-center lg:justify-start gap-2 flex-wrap">
-              <span>{starterWord}</span>{" "}
-              <span className="inline-block align-baseline">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-center lg:text-left">
+              <span className="block text-gray-100 mb-1">{starterWord}</span>
+              <span className="block min-h-[1.25em]">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={helloWords[helloWordIndex]}
-                    initial={{ y: 20, opacity: 0 }}
+                    initial={{ y: 15, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
+                    exit={{ y: -15, opacity: 0 }}
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                     className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-500"
-                    style={{ lineHeight: 1.4 }}
+                    style={{ lineHeight: 1.3 }}
                   >
                     {helloWords[helloWordIndex]}
                   </motion.span>
@@ -197,18 +204,45 @@ export default function App() {
               </div>
             </div>
 
+            <div className="mt-6 grid grid-cols-3 gap-2.5 text-left max-w-md mx-auto lg:mx-0">
+              <div className="p-3 rounded-2xl border border-cyan-500/25 bg-gradient-to-br from-cyan-500/10 via-cyan-950/20 to-transparent backdrop-blur-xl hover:border-cyan-500/40 transition-colors shadow-lg shadow-cyan-950/20">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-300">
+                  <Activity size={13} className="text-cyan-400" />
+                  <span>High-Load</span>
+                </div>
+                <div className="text-[11px] text-cyan-200/60 mt-1 font-mono">Distributed C#</div>
+              </div>
+
+              <div className="p-3 rounded-2xl border border-fuchsia-500/25 bg-gradient-to-br from-fuchsia-500/10 via-fuchsia-950/20 to-transparent backdrop-blur-xl hover:border-fuchsia-500/40 transition-colors shadow-lg shadow-fuchsia-950/20">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-fuchsia-300">
+                  <Layers size={13} className="text-fuchsia-400" />
+                  <span>Full-Cycle</span>
+                </div>
+                <div className="text-[11px] text-fuchsia-200/60 mt-1 font-mono">Schema to CI/CD</div>
+              </div>
+
+              <div className="p-3 rounded-2xl border border-emerald-500/25 bg-gradient-to-br from-emerald-500/10 via-emerald-950/20 to-transparent backdrop-blur-xl hover:border-emerald-500/40 transition-colors shadow-lg shadow-emerald-950/20">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-300">
+                  <Award size={13} className="text-emerald-400" />
+                  <span>{dynamicExpYears} Yrs</span>
+                </div>
+                <div className="text-[11px] text-emerald-200/60 mt-1 font-mono">Production Exp</div>
+              </div>
+            </div>
+
             <div className="mt-6 flex flex-col sm:flex-row flex-wrap gap-3 justify-center lg:justify-start">
               <a
-                href="https://t.me/sdwck"
+                href="https://github.com/sdwck"
                 target="_blank"
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-2xl border border-white/10 bg-white/10 text-sm sm:text-base transition-colors hover:bg-white/20"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-2xl border border-indigo-500/40 bg-indigo-500/20 text-indigo-200 text-sm sm:text-base font-medium transition-colors hover:bg-indigo-500/30"
               >
-                <FaTelegramPlane className="flex-shrink-0" />
-                <span>Send me DM</span>
+                <FaGithub className="flex-shrink-0 text-lg" />
+                <span>GitHub Profile</span>
               </a>
               <a
                 href="mailto:sdwcktarakanov@gmail.com"
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-2xl border border-white/10 text-sm sm:text-base transition-colors hover:bg-white/5"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-2xl border border-white/10 bg-white/5 text-sm sm:text-base transition-colors hover:bg-white/10"
               >
                 <Mail size={16} className="flex-shrink-0" />
                 <span>Contact</span>
@@ -216,19 +250,8 @@ export default function App() {
             </div>
           </div>
 
-          <div className="relative order-1 lg:order-2">
-            <div className="absolute -inset-3 sm:-inset-6 rounded-xl sm:rounded-[2rem] bg-gradient-to-tr from-indigo-500/20 via-fuchsia-500/10 to-amber-500/20 blur-xl sm:blur-2xl" />
-            <div
-              className="relative rounded-xl sm:rounded-[2rem] border border-white/10 overflow-hidden shadow-xl sm:shadow-2xl"
-              style={{ aspectRatio: "3 / 2" }}
-            >
-              <img
-                src="/desk.jpg"
-                alt="workspace"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
+          <div className="order-1 lg:order-2">
+            <HeroTerminalWidget />
           </div>
         </section>
 

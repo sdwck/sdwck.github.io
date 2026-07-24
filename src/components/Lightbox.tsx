@@ -4,7 +4,12 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 export function Lightbox({ open, images, startIndex = 0, onClose }: { open: boolean; images: string[]; startIndex?: number; onClose: () => void; }) {
   const [idx, setIdx] = useState(startIndex);
-  useEffect(() => setIdx(startIndex), [startIndex]);
+
+  useEffect(() => {
+    if (open) {
+      setIdx(startIndex);
+    }
+  }, [open, images, startIndex]);
 
   useEffect(() => {
     if (!open) return;

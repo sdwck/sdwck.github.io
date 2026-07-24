@@ -35,7 +35,7 @@ export default function Header({
               </span>
 
               <span className="text-xs text-white/45">
-                Backend Engineer
+                Software Engineer
               </span>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function Header({
             </span>
 
             <span className="text-xs text-white/45">
-              Backend Engineer
+              Software Engineer
             </span>
           </div>
 

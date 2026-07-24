@@ -44,7 +44,11 @@ export default function ThreeBackground({ activeProject }: Props) {
                 <directionalLight position={[10, 10, 5]} intensity={1} />
 
                 <BaseParticles activeProject={activeProject} />
-                <InstancedModelsField activeProject={activeProject} />
+                {activeProject === 'unlinknl' && (
+                    <Suspense fallback={null}>
+                        <InstancedModelsField activeProject={activeProject} />
+                    </Suspense>
+                )}
                 <MentalBreather active={activeProject === 'mental-reset'} />
                 <VoxWavefield active={activeProject === 'voxnl'} />
                 <SolarTrackParticles active={activeProject === 'solartrack'} />
